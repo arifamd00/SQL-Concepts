@@ -1,0 +1,11 @@
+\d //  # define a delimeter
+
+Create procedure selectClient(IN id int(11))
+begin
+select * from Clients where ClientId = id;
+end // 
+
+call selectClient(2); //
+
+see output: https://drive.google.com/file/d/1I3EAAGsJRpyfjrwg9GjilCe9xw9aeS5C/view?usp=sharing
+
