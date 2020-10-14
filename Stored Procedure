@@ -16,4 +16,4 @@ select count(PurchaseId) into total from purchases where ClientId = id ;
 end //
 
 call countPurchases(2, @user);
-select @auser as count; //
+select @auser as count; // # add a alias name
