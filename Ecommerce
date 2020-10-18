@@ -1,0 +1,38 @@
+To setup the ecommerce database we need 3 tables which are Clients, Products, Purchases
+Here is the SQL
+
+1. Clients: CREATE TABLE `clients` (
+  `ClientId` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `Surname` tinytext,
+  `Age` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ClientId`)
+  );
+  
+  2. Products: CREATE TABLE `products` (
+  `ProductId` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `Price` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ProductId`)
+);
+
+3. Purchases: CREATE TABLE `purchases` (
+  `PurchaseId` int(11) NOT NULL AUTO_INCREMENT,
+  `Date` timestamp NULL DEFAULT NULL,
+  `ClientId` int(11) DEFAULT NULL,
+  `ProductId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`PurchaseId`),
+  KEY `ClientId` (`ClientId`),
+  KEY `ProductId` (`ProductId`)
+);
+
+===============================================================================================================================
+Query for ecommerce databse.
+
+1. Write a query to fetch the records "Qty of purchases" and client full's name who made more than one purchases.
+Ans: select count(purchases.PurchaseId) as "Qty of Purchases", clients.Name from purchases, clients  where purchases.ClientId = clients.ClientId 
+group by purchases.ClientId having count(purchases.PurchaseId) > 1;
+
+2. Write a query to fetch the records Product's name, client's full name who made atleast one purchase.
+Ans: select concat(clients.Name, " ", clients.Surname), products.Name from ((purchases inner join clients on purchases.ClientId = clients.ClientId) 
+inner join products on purchases.ProductId = Products.ProductId);
